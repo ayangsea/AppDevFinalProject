@@ -17,6 +17,6 @@ public interface SisDatabaseDao {
     @Delete()
     void deleteTask(Task task);
 
-    @Query("SELECT taskDescription FROM Task")
+    @Query("SELECT * FROM Task")
     List<Task> getTasks();
 }
