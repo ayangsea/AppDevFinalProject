@@ -15,6 +15,9 @@ public interface SisDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addTask(Task task);
 
+    @Query("DELETE FROM Task")
+    void nukeAll();
+
     @Delete()
     void deleteTask(Task task);
 

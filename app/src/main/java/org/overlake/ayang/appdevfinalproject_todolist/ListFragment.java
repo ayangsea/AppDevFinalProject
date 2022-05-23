@@ -49,6 +49,13 @@ public class ListFragment extends Fragment {
             }
         });
 
+        binding.clearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dao.nukeAll();
+            }
+        });
+
         FragmentManager fm = getParentFragmentManager();
         fm.setFragmentResultListener(REQ_KEY, this, new FragmentResultListener() {
             @Override
