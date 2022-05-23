@@ -56,9 +56,6 @@ public class ListFragment extends Fragment {
                 dao.addTask(new Task(result.getString(TASK_DESCRIPTION)));
             }
         });
-
         return binding.getRoot();
-
     }
-
 }
