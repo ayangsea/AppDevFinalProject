@@ -13,4 +13,7 @@
     <string name="clear_all">Clear All</string>
     <string name="active_tasks">Active Tasks</string>
     <string name="urgent">Urgent</string>
+    <string name="your_to_do_list" />
+    <string name="to_do_list">Your To Do List</string>
+    <string name="categories">Categories:</string>
 </resources>

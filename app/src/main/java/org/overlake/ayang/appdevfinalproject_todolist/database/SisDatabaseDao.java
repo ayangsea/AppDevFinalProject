@@ -16,11 +16,25 @@ public interface SisDatabaseDao {
     void addTask(Task task);
 
     @Query("DELETE FROM Task")
-    void nukeAll();
+    void nukeTasks();
 
     @Delete()
     void deleteTask(Task task);
 
     @Query("SELECT * FROM Task")
     LiveData<List<Task>> getTasks();
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void addCategory(Category category);
+
+//    @Query("DELETE FROM Category WHERE name = category.name")
+//    void deleteCategory(Category category);
+
+    @Query("SELECT * FROM Category")
+    LiveData<List<Category>> getCategories();
+
+    @Query("DELETE FROM Category")
+    void nukeCategories();
+
+    //add a getcategoryid method
 }

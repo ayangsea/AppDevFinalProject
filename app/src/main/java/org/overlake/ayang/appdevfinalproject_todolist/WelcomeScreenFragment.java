@@ -1,5 +1,7 @@
 package org.overlake.ayang.appdevfinalproject_todolist;
 
+import static org.overlake.ayang.appdevfinalproject_todolist.AddCategoryDialogFragment.CATEGORY_KEY;
+import static org.overlake.ayang.appdevfinalproject_todolist.AddCategoryDialogFragment.CATEGORY_NAME;
 import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.REQ_KEY;
 import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.TASK_DESCRIPTION;
 import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.URGENT;
@@ -13,57 +15,52 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.LiveData;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.room.Room;
 
-import com.google.android.material.snackbar.Snackbar;
-
+import org.overlake.ayang.appdevfinalproject_todolist.database.Category;
 import org.overlake.ayang.appdevfinalproject_todolist.database.SisDatabase;
 import org.overlake.ayang.appdevfinalproject_todolist.database.SisDatabaseDao;
 import org.overlake.ayang.appdevfinalproject_todolist.database.Task;
-import org.overlake.ayang.appdevfinalproject_todolist.databinding.FragmentListBinding;
+import org.overlake.ayang.appdevfinalproject_todolist.databinding.FragmentSecondBinding;
+import org.overlake.ayang.appdevfinalproject_todolist.databinding.FragmentWelcomeScreenBinding;
 
-import java.util.List;
+public class WelcomeScreenFragment extends Fragment {
 
-public class ListFragment extends Fragment {
-
-    private FragmentListBinding binding;
+    private FragmentWelcomeScreenBinding binding;
+    private SisDatabaseDao mDao;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentListBinding.inflate(inflater, container, false);
+
+        binding = FragmentWelcomeScreenBinding.inflate(inflater, container, false);
 
         SisDatabase database = Room.databaseBuilder(getContext(),SisDatabase.class,"SISDatabase").allowMainThreadQueries().build();
-        SisDatabaseDao dao = database.getDao();
-        binding.recycler.setAdapter(new ListAdapter(dao, this));
+        mDao = database.getDao();
+        binding.categoryRecyclerView.setAdapter(new WelcomeScreenAdapter(mDao, this));
 
-        AddTaskDialogFragment dialog = new AddTaskDialogFragment();
+        AddCategoryDialogFragment dialog = new AddCategoryDialogFragment();
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        binding.addCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.show(getParentFragmentManager(), null);
             }
         });
 
-        binding.clearAll.setOnClickListener(new View.OnClickListener() {
+        FragmentManager fm = getParentFragmentManager();
+        fm.setFragmentResultListener(CATEGORY_KEY, this, new FragmentResultListener() {
             @Override
-            public void onClick(View view) {
-                dao.nukeTasks();
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                mDao.addCategory(new Category(result.getString(CATEGORY_NAME)));
             }
         });
 
-        FragmentManager fm = getParentFragmentManager();
-        fm.setFragmentResultListener(REQ_KEY, this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                dao.addTask(new Task(result.getString(TASK_DESCRIPTION), result.getBoolean(URGENT)));
-            }
-        });
         return binding.getRoot();
+
     }
+
 }
