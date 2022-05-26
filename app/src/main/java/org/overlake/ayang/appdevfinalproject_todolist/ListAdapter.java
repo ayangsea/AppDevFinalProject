@@ -1,5 +1,6 @@
 package org.overlake.ayang.appdevfinalproject_todolist;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Task task = mTasks.get(position);
         holder.description.setText(task.taskDescription);
+        if (task.isUrgent()) {
+            holder.description.setTextColor(Color.RED);
+        }
     }
 
     @Override

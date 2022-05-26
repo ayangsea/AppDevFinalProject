@@ -2,6 +2,7 @@ package org.overlake.ayang.appdevfinalproject_todolist;
 
 import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.REQ_KEY;
 import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.TASK_DESCRIPTION;
+import static org.overlake.ayang.appdevfinalproject_todolist.AddTaskDialogFragment.URGENT;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -60,7 +61,7 @@ public class ListFragment extends Fragment {
         fm.setFragmentResultListener(REQ_KEY, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                dao.addTask(new Task(result.getString(TASK_DESCRIPTION)));
+                dao.addTask(new Task(result.getString(TASK_DESCRIPTION), result.getBoolean(URGENT)));
             }
         });
         return binding.getRoot();

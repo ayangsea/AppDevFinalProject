@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="check_box_done">Done</string>
     <string name="clear_all">Clear All</string>
+    <string name="active_tasks">Active Tasks</string>
+    <string name="urgent">Urgent</string>
 </resources>
