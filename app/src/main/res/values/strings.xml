@@ -16,4 +16,6 @@
     <string name="your_to_do_list" />
     <string name="to_do_list">Your To Do List</string>
     <string name="categories">Categories:</string>
+    <string name="to_do_list_label">To Do List</string>
+    <string name="tasks">Tasks</string>
 </resources>

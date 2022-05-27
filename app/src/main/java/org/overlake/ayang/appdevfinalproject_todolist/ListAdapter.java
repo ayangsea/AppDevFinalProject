@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         if (task.isUrgent()) {
             holder.description.setTextColor(Color.RED);
         }
+        if (task.isDone()) {
+            holder.checkBox.setChecked(true);
+        }
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    task.taskDone();
+                } else {
+                    task.taskDone();
+                }
+            }
+        });
     }
 
     @Override
@@ -60,11 +75,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     protected class ListViewHolder extends RecyclerView.ViewHolder {
 
         public TextView description;
+        public CheckBox checkBox;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             CardView cardView = itemView.findViewById(R.id.task_view);
             description = cardView.findViewById(R.id.task_description);
+            checkBox = (CheckBox) cardView.findViewById(R.id.check_box);
         }
     }
 }

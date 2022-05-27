@@ -55,7 +55,7 @@ public class ListFragment extends Fragment {
         fm.setFragmentResultListener(REQ_KEY, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                dao.addTask(new Task(result.getString(TASK_DESCRIPTION), result.getBoolean(URGENT), mCategoryID));
+                dao.addTask(new Task(result.getString(TASK_DESCRIPTION), result.getBoolean(URGENT), mCategoryID, false));
             }
         });
         return binding.getRoot();

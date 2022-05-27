@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="org.overlake.ayang.appdevfinalproject_todolist.ListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/tasks"
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_FirstFragment_to_welcomeScreenFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/WelcomeScreenFragment"
         android:name="org.overlake.ayang.appdevfinalproject_todolist.WelcomeScreenFragment"
-        android:label="WelcomeScreenFragment" >
+        android:label="@string/to_do_list_label">
         <action
             android:id="@+id/action_welcomeScreenFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />

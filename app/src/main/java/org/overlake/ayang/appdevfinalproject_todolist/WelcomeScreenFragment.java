@@ -22,7 +22,6 @@ import org.overlake.ayang.appdevfinalproject_todolist.database.Category;
 import org.overlake.ayang.appdevfinalproject_todolist.database.SisDatabase;
 import org.overlake.ayang.appdevfinalproject_todolist.database.SisDatabaseDao;
 import org.overlake.ayang.appdevfinalproject_todolist.database.Task;
-import org.overlake.ayang.appdevfinalproject_todolist.databinding.FragmentSecondBinding;
 import org.overlake.ayang.appdevfinalproject_todolist.databinding.FragmentWelcomeScreenBinding;
 
 public class WelcomeScreenFragment extends Fragment {
@@ -35,7 +34,6 @@ public class WelcomeScreenFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentWelcomeScreenBinding.inflate(inflater, container, false);
 
         SisDatabase database = Room.databaseBuilder(getContext(),SisDatabase.class,"SISDatabase").allowMainThreadQueries().build();
