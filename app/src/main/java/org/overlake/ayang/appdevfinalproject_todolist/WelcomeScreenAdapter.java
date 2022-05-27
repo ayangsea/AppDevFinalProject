@@ -1,4 +1,5 @@
 package org.overlake.ayang.appdevfinalproject_todolist;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class WelcomeScreenAdapter extends RecyclerView.Adapter<WelcomeScreenAdap
 
     List<Category> mCategories;
     WelcomeScreenFragment mfragment;
+    public static final String CATEGORY_ID = "category_id";
 
     public WelcomeScreenAdapter(SisDatabaseDao dao, WelcomeScreenFragment welcomeScreenFragment) {
         dao.getCategories().observe(welcomeScreenFragment, new Observer<List<Category>>() {
@@ -44,8 +46,9 @@ public class WelcomeScreenAdapter extends RecyclerView.Adapter<WelcomeScreenAdap
         holder.GoArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(mfragment).navigate(R.id.action_welcomeScreenFragment_to_FirstFragment);
-
+                Bundle bundle = new Bundle();
+                bundle.putInt(CATEGORY_ID, category.categoryID);
+                NavHostFragment.findNavController(mfragment).navigate(R.id.action_welcomeScreenFragment_to_FirstFragment, bundle);
             }
         });
     }

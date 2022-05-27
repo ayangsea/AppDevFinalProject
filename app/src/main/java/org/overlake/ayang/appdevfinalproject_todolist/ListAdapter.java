@@ -19,15 +19,17 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder>{
 
     List<Task> mTasks;
+    private int mCategoryID;
 
-    public ListAdapter(SisDatabaseDao dao, ListFragment listFragment) {
-        dao.getTasks().observe(listFragment, new Observer<List<Task>>() {
+    public ListAdapter(SisDatabaseDao dao, ListFragment listFragment, int categoryID) {
+        dao.getTasks(categoryID).observe(listFragment, new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
                 mTasks = tasks;
                 notifyDataSetChanged();
             }
         });
+        mCategoryID = categoryID;
     }
 
     @NonNull
